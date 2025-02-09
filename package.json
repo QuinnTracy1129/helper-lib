@@ -3,8 +3,10 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
-  "main": "dist/index.js",
-  "module": "dist/index.js",
+  "exports": {
+    "./utils": "./utils/index.js",
+    "./components": "./components/index.js"
+  },
   "scripts": {
     "clone": "npm install && npm start",
     "start": "vite --port 3000 --host --open",
