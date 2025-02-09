@@ -4,8 +4,8 @@
   "version": "0.0.0",
   "type": "module",
   "exports": {
-    "./utils": "./utils/index.js",
-    "./components": "./components/index.js"
+    "./utils": "./src/utils/",
+    "./components": "./components/"
   },
   "scripts": {
     "clone": "npm install && npm start",
