@@ -1,4 +1,4 @@
-import { isEmpty } from './isEmpty.js';
+// import { isEmpty } from './isEmpty.js';
 
 const filter = async (Model, criteria, options = { sort: { createdAt: -1 }, select: '' }) => {
   try {
@@ -7,7 +7,8 @@ const filter = async (Model, criteria, options = { sort: { createdAt: -1 }, sele
     const payload = await Model.find(criteria).select(`${select} -password`).sort(sort).lean();
 
     return {
-      code: isEmpty(payload) ? 204 : 200,
+      //   code: isEmpty(payload) ? 204 : 200,
+      code: 200,
       payload,
     };
   } catch (message) {
