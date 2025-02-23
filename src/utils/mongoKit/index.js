@@ -1,4 +1,4 @@
-import { isEmpty } from '../isEmpty';
+import { isEmpty } from '../isEmpty.js';
 
 const filter = async (Model, criteria, { sort = { createdAt: -1 }, select = '' }) => {
   try {
