@@ -21,6 +21,26 @@ const filter = async (Model, criteria, options = { sort: { createdAt: -1 }, sele
   }
 };
 
+const create = async (Model, data) => {
+  try {
+    const payload = await Model.create(data);
+
+    return {
+      code: 201,
+      payload: { ...payload._doc, password: undefined },
+    };
+  } catch (message) {
+    return {
+      code: 500,
+      payload: {
+        error: 'INTERNAL_SERVER_ERROR',
+        message,
+      },
+    };
+  }
+};
+
 export const mongoKit = {
   filter,
+  create,
 };
