@@ -3,6 +3,7 @@ export { _objectMapper } from './_objectMapper/index.js';
 export { _sayHello } from './_sayHello.js';
 export { formatCurrency } from './formatCurrency.js';
 export { isEmpty } from './isEmpty.js';
+export { toast } from './toast.js';
 export { mongoKit } from './mongoKit.js';
 
 // RULES
