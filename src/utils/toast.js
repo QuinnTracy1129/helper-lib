@@ -1,14 +1,15 @@
 import Swal from 'sweetalert2';
 
 export function toast(settings) {
-  const darkMode = Boolean(Number(localStorage.getItem('darkMode')));
+  const darkMode = Boolean(Number(localStorage.getItem('darkMode'))),
+    { light = {}, dark = {} } = JSON.parse(localStorage.getItem() || '{}');
 
-  let background = '#783F8E',
-    color = '#C8C6D7';
+  let background = light.background || '#783F8E',
+    color = light.color || '#C8C6D7';
 
   if (darkMode) {
-    background = '#263238';
-    color = '#FBFBFB';
+    background = dark.background || '#263238';
+    color = dark.color || '#FBFBFB';
   }
 
   return Swal.fire({
