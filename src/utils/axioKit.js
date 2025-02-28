@@ -3,6 +3,8 @@ import { isEmpty } from './isEmpty.js';
 import { toast } from './toast.js';
 
 const errorHandler = ({ response }) => {
+  console.log('failed here', response);
+
   const { data, status = '' } = response,
     tokenFailure = [401, 403, 406];
 
@@ -20,6 +22,7 @@ const errorHandler = ({ response }) => {
     title,
     text: message.length < 30 ? message : 'Open console to debug.',
   });
+  throw new Error(data.error);
 };
 
 let API_HEADER = '';
@@ -61,6 +64,8 @@ const post = async (endpoint, payload, options = {}) => {
   return await axios
     .post(endpoint, {}, getHeader())
     .then((res) => {
+      console.log('success call', res);
+
       if (useToast) toast({ icon: 'success', title: title || 'Success', text });
 
       return res;
