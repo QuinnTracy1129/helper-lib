@@ -6,6 +6,7 @@ export { isEmpty } from './isEmpty.js';
 export { keywordSearch } from './keywordSearch.js';
 export { toast } from './toast.js';
 export { mongoKit } from './mongoKit.js';
+export { axioKit } from './axioKit.js';
 
 // RULES
 // Strictly follows camel-casing for both function and file names
