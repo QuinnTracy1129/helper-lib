@@ -5,24 +5,23 @@ import { toast } from './toast.js';
 const errorHandler = ({ response }) => {
   console.log('failed here', response);
 
-  const { data, status = '' } = response,
-    tokenFailure = [401, 403, 406];
+  const tokenFailure = [401, 403, 406];
 
-  if (tokenFailure.includes(status)) {
+  if (tokenFailure.includes(response?.status)) {
     localStorage.removeItem('token');
     localStorage.removeItem('email');
   }
 
-  console.error(data);
+  console.error(response.data);
 
-  const { error: title, message } = data;
+  const { error: title, message } = response.data;
 
   toast({
     icon: 'error',
     title,
     text: message.length < 30 ? message : 'Open console to debug.',
   });
-  throw new Error(data.error);
+  throw new Error(response.data.error);
 };
 
 let API_HEADER = '';
