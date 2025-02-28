@@ -7,6 +7,7 @@ export { keywordSearch } from './keywordSearch.js';
 export { toast } from './toast.js';
 export { mongoKit } from './mongoKit.js';
 export { axioKit } from './axioKit.js';
+export { aesKit } from './aesKit.js';
 
 // RULES
 // Strictly follows camel-casing for both function and file names

@@ -3,33 +3,34 @@ import { isEmpty } from './isEmpty.js';
 import { toast } from './toast.js';
 
 const errorHandler = ({ response }) => {
-  console.log('failed here', response);
+  const { data, status } = response,
+    tokenFailure = [401, 403, 406];
 
-  const tokenFailure = [401, 403, 406];
-
-  if (tokenFailure.includes(response?.status)) {
+  if (tokenFailure.includes(status)) {
     localStorage.removeItem('token');
     localStorage.removeItem('email');
   }
 
-  console.error(response.data);
+  console.error(data);
 
-  const { error: title, message } = response.data;
+  const { error: title, message } = data;
 
   toast({
     icon: 'error',
     title,
     text: message.length < 30 ? message : 'Open console to debug.',
   });
-  throw new Error(response.data.error);
+  throw new Error(data.error);
 };
 
 let API_HEADER = '';
 
+// set header globally for axioKit to reuse
 const setHeader = (header) => {
   API_HEADER = header;
 };
 
+// set defaults depending on passed baseURL
 const setDefaults = ({ baseURL }) => {
   axios.defaults.baseURL = baseURL;
   axios.defaults.withCredentials = true;
@@ -62,16 +63,12 @@ const post = async (endpoint, payload, options = {}) => {
 
   return await axios
     .post(endpoint, {}, getHeader())
-    .then((res) => {
-      console.log('success call', res);
-
+    .then(({ data }) => {
       if (useToast) toast({ icon: 'success', title: title || 'Success', text });
 
-      return res;
+      return data.payload;
     })
-    .catch((res) => {
-      console.log(res, 'here');
-    });
+    .catch(errorHandler);
 };
 
 export const axioKit = {
