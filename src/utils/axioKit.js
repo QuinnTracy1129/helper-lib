@@ -51,6 +51,8 @@ const post = async (endpoint, payload, options = {}) => {
 
   const { useToast = true, title = '', text = '' } = options;
 
+  console.log(getHeader());
+
   return await axios
     .post(endpoint, {}, getHeader())
     .then(({ data }) => {
