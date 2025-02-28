@@ -60,14 +60,14 @@ const post = async (endpoint, payload, options = {}) => {
 
   const { useToast = true, title = '', text = '' } = options;
 
-  console.log(getHeader());
-
   return await axios
     .post(endpoint, { payload: aesKit.encrypt(payload) }, getHeader())
-    .then(({ data }) => {
+    .then((res) => {
       if (useToast) toast({ icon: 'success', title: title || 'Success', text });
 
-      return aesKit.decrypt(data.payload);
+      console.log(res, 'here');
+
+      return aesKit.decrypt(res.data.payload);
     })
     .catch(errorHandler);
 };
