@@ -6,17 +6,10 @@ const setConfig = (pepper) => {
   AES_PEPPER = pepper;
 };
 
-const encrypt = (salt) => {
-  if (!salt) return '';
+const encrypt = (salt) => CryptoJS.AES.encrypt(JSON.stringify(salt), AES_PEPPER).toString();
 
-  return CryptoJS.AES.encrypt(JSON.stringify(salt), AES_PEPPER).toString();
-};
-
-const decrypt = (salt) => {
-  if (!salt) return {};
-
-  return JSON.parse(CryptoJS.AES.decrypt(salt, AES_PEPPER).toString(CryptoJS.enc.Utf8));
-};
+const decrypt = (salt) =>
+  JSON.parse(CryptoJS.AES.decrypt(salt, AES_PEPPER).toString(CryptoJS.enc.Utf8));
 
 export const aesKit = {
   testConfig: () => {
