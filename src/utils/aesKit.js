@@ -12,9 +12,6 @@ const decrypt = (salt) =>
   JSON.parse(CryptoJS.AES.decrypt(salt, AES_PEPPER).toString(CryptoJS.enc.Utf8));
 
 export const aesKit = {
-  testConfig: () => {
-    console.log(AES_PEPPER);
-  },
   setConfig,
   encrypt,
   decrypt,

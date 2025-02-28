@@ -26,13 +26,8 @@ const errorHandler = ({ response }) => {
 
 let API_HEADER = '';
 
-// set header globally for axioKit to reuse
-const setHeader = (header) => {
+const setConfig = ({ baseURL, header }) => {
   API_HEADER = header;
-};
-
-// set defaults depending on passed baseURL
-const setDefaults = ({ baseURL }) => {
   axios.defaults.baseURL = baseURL;
   axios.defaults.withCredentials = true;
 };
@@ -71,7 +66,6 @@ const post = async (endpoint, payload, options = {}) => {
 };
 
 export const axioKit = {
-  setHeader,
-  setDefaults,
+  setConfig,
   post,
 };
