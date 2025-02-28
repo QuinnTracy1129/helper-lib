@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { isEmpty } from './isEmpty.js';
+import { aesKit } from './aesKit.js';
 import { toast } from './toast.js';
 
 const errorHandler = ({ response }) => {
@@ -62,11 +63,11 @@ const post = async (endpoint, payload, options = {}) => {
   console.log(getHeader());
 
   return await axios
-    .post(endpoint, {}, getHeader())
+    .post(endpoint, aesKit.encrypt(payload), getHeader())
     .then(({ data }) => {
       if (useToast) toast({ icon: 'success', title: title || 'Success', text });
 
-      return data.payload;
+      return aesKit.decrypt(data.payload);
     })
     .catch(errorHandler);
 };
