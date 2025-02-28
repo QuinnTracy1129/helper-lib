@@ -28,6 +28,11 @@ const setHeader = (header) => {
   API_HEADER = header;
 };
 
+const setDefaults = ({ baseURL }) => {
+  axios.defaults.baseURL = baseURL;
+  axios.defaults.withCredentials = true;
+};
+
 const getHeader = () => {
   const token = localStorage.getItem('token');
 
@@ -55,15 +60,16 @@ const post = async (endpoint, payload, options = {}) => {
 
   return await axios
     .post(endpoint, {}, getHeader())
-    .then(({ data }) => {
+    .then((res) => {
       if (useToast) toast({ icon: 'success', title: title || 'Success', text });
 
-      return data;
+      return res;
     })
     .catch(errorHandler);
 };
 
 export const axioKit = {
   setHeader,
+  setDefaults,
   post,
 };
