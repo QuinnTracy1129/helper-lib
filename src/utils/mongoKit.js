@@ -1,3 +1,5 @@
+import { mongoError } from './mongoError.js';
+
 const filter = async (Model, criteria = {}, options = { sort: { createdAt: -1 }, select: '' }) => {
   try {
     const { select, sort } = options;
@@ -8,14 +10,8 @@ const filter = async (Model, criteria = {}, options = { sort: { createdAt: -1 },
       code: 200,
       payload,
     };
-  } catch (message) {
-    return {
-      code: 500,
-      payload: {
-        error: 'INTERNAL_SERVER_ERROR',
-        message,
-      },
-    };
+  } catch (error) {
+    return mongoError(error);
   }
 };
 
@@ -27,14 +23,8 @@ const create = async (Model, data) => {
       code: 201,
       payload: { ...payload._doc, password: undefined },
     };
-  } catch (message) {
-    return {
-      code: 500,
-      payload: {
-        error: 'INTERNAL_SERVER_ERROR',
-        message,
-      },
-    };
+  } catch (error) {
+    return mongoError(error);
   }
 };
 

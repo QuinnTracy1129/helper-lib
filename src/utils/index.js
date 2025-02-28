@@ -5,6 +5,8 @@ export { formatCurrency } from './formatCurrency.js';
 export { isEmpty } from './isEmpty.js';
 export { keywordSearch } from './keywordSearch.js';
 export { toast } from './toast.js';
+export { mongoError } from './mongoError.js';
+export { mongoReferenceExists } from './mongoReferenceExists.js';
 export { mongoKit } from './mongoKit.js';
 export { axioKit } from './axioKit.js';
 export { aesKit } from './aesKit.js';

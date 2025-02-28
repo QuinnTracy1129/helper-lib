@@ -42,7 +42,7 @@ const getHeader = () => {
   };
 };
 
-const post = async (endpoint, payload, options = {}) => {
+const post = async (endpoint = '', payload = {}, options = {}) => {
   if (isEmpty(payload) || typeof payload !== 'object')
     return errorHandler({
       response: {
@@ -65,7 +65,83 @@ const post = async (endpoint, payload, options = {}) => {
     .catch(errorHandler);
 };
 
+const get = async (endpoint = '', payload = {}, options = {}) => {
+  const query = payload ? `payload=${encodeURIComponent(aesKit.encrypt(payload))}` : '';
+
+  const { useToast = true, title = '', text = '' } = options;
+
+  return await axios
+    .get(`${endpoint}?${query}`, getHeader())
+    .then(({ data }) => {
+      if (useToast) toast({ icon: 'success', title: title || 'Success', text });
+
+      return aesKit.decrypt(data.payload);
+    })
+    .catch(errorHandler);
+};
+
+const put = async (endpoint = '', payload = {}, options = {}) => {
+  if (isEmpty(payload) || typeof payload !== 'object')
+    return errorHandler({
+      response: {
+        data: {
+          error: 'INVALID_PAYLOAD',
+          message: 'Payload is empty.',
+        },
+      },
+    });
+
+  if (!payload?._id)
+    return errorHandler({
+      response: {
+        data: {
+          error: 'INVALID_PARAMETERS',
+          message: 'Identifier is missing.',
+        },
+      },
+    });
+
+  const { useToast = true, title = '', text = '' } = options;
+
+  return await axios
+    .put(endpoint, { payload: aesKit.encrypt(payload) }, getHeader())
+    .then(({ data }) => {
+      if (useToast) toast({ icon: 'success', title: title || 'Success', text });
+
+      return aesKit.decrypt(data.payload);
+    })
+    .catch(errorHandler);
+};
+
+const del = async (endpoint = '', payload = {}, options = {}) => {
+  if (!payload?._id)
+    return errorHandler({
+      response: {
+        data: {
+          error: 'INVALID_PARAMETERS',
+          message: 'Identifier is missing.',
+        },
+      },
+    });
+
+  const query = `payload=${encodeURIComponent(aesKit.encrypt(payload))}`;
+
+  const { useToast = true, title = '', text = '' } = options;
+
+  return await axios
+    .delete(`${endpoint}?${query}`, getHeader())
+    .then(({ data }) => {
+      if (useToast) toast({ icon: 'success', title: title || 'Success', text });
+
+      return aesKit.decrypt(data.payload);
+    })
+    .catch(errorHandler);
+};
+
 export const axioKit = {
   setConfig,
   post,
+  get,
+  put,
+  del,
 };
