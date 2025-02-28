@@ -69,7 +69,9 @@ const post = async (endpoint, payload, options = {}) => {
 
       return res;
     })
-    .catch(errorHandler);
+    .catch((res) => {
+      console.log(res, 'here');
+    });
 };
 
 export const axioKit = {
