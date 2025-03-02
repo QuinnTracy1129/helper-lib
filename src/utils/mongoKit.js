@@ -1,10 +1,17 @@
 import { mongoError } from './mongoError.js';
 
-const filter = async (Model, criteria = {}, options = { sort: { createdAt: -1 }, select: '' }) => {
+const filter = async (
+  Model,
+  criteria = {},
+  options = { sort: { createdAt: -1 }, select: '', remove: '-password' },
+) => {
   try {
-    const { select, sort } = options;
+    const { select, remove, sort } = options;
 
-    const payload = await Model.find(criteria).select(`${select} -password`).sort(sort).lean();
+    const payload = await Model.find(criteria)
+      .select(select || remove)
+      .sort(sort)
+      .lean();
 
     return {
       code: 200,
@@ -15,9 +22,11 @@ const filter = async (Model, criteria = {}, options = { sort: { createdAt: -1 },
   }
 };
 
-const find = async (Model, criteria) => {
+const find = async (Model, criteria, options = { select: '', remove: '-password' }) => {
   try {
-    const payload = await Model.findOne(criteria);
+    const { select, remove } = options;
+
+    const payload = await Model.findOne(criteria).select(select || remove);
 
     if (!payload) return mongoError({ code: 404 });
 
