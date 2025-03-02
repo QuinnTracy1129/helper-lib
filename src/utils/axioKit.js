@@ -7,14 +7,15 @@ const errorHandler = ({ response }) => {
   const { data, status } = response,
     tokenFailure = [401, 403, 406];
 
+  let { error: title, message } = data;
+
   if (tokenFailure.includes(status)) {
-    localStorage.removeItem('token');
-    localStorage.removeItem('email');
+    localStorage.setItem('authenticationFailed', new Date().toDateString());
+    message = 'Please relogin.';
+    setTimeout(window.location.reload, 2500);
   }
 
   console.error(data);
-
-  const { error: title, message } = data;
 
   toast({
     icon: 'error',
