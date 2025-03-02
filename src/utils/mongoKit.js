@@ -28,7 +28,13 @@ const create = async (Model, data) => {
   }
 };
 
+const update = async (Model, data) => {
+  // increment __v
+  // improve populate, better if we can pass object, must create sample of nested objectIds
+};
+
 export const mongoKit = {
   filter,
   create,
+  update,
 };
