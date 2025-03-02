@@ -28,7 +28,11 @@ const errorHandler = ({ response }) => {
 const validateAuth = () => {
   const isExpired = localStorage.getItem('authenticationFailed');
 
-  if (isExpired) throw new Error('Please relogin.');
+  // if token is deemed to be expired, we shall stop all api calls at all.
+  if (isExpired) {
+    console.warn('Credentials are expired.');
+    throw new Error('Please relogin.');
+  }
 };
 
 let API_HEADER = '';

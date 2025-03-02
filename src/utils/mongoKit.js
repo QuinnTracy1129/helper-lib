@@ -15,6 +15,21 @@ const filter = async (Model, criteria = {}, options = { sort: { createdAt: -1 },
   }
 };
 
+const find = async (Model, criteria) => {
+  try {
+    const payload = await Model.findOne(criteria);
+
+    if (!payload) return mongoError({ code: 404 });
+
+    return {
+      code: 200,
+      payload,
+    };
+  } catch (error) {
+    return mongoError(error);
+  }
+};
+
 const create = async (Model, data) => {
   try {
     const payload = await Model.create(data);
@@ -35,6 +50,7 @@ const update = async (Model, data) => {
 
 export const mongoKit = {
   filter,
+  find,
   create,
   update,
 };

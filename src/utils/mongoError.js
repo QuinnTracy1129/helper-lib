@@ -11,6 +11,15 @@ export function mongoError({ name, message, code, keyValue }) {
     };
   }
 
+  if (code === 404)
+    return {
+      code,
+      payload: {
+        error: 'NOT_FOUND',
+        message: 'Nothing was matched.',
+      },
+    };
+
   if (code === 400)
     return {
       code,
