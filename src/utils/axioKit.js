@@ -25,6 +25,12 @@ const errorHandler = ({ response }) => {
   throw new Error(data.error);
 };
 
+const validateAuth = () => {
+  const isExpired = localStorage.getItem('authenticationFailed');
+
+  if (isExpired) throw new Error('Please relogin.');
+};
+
 let API_HEADER = '';
 
 const setConfig = ({ baseURL, header }) => {
@@ -44,6 +50,8 @@ const getHeader = () => {
 };
 
 const post = async (endpoint = '', payload = {}, options = {}) => {
+  validateAuth();
+
   if (isEmpty(payload) || typeof payload !== 'object')
     return errorHandler({
       response: {
@@ -67,6 +75,8 @@ const post = async (endpoint = '', payload = {}, options = {}) => {
 };
 
 const get = async (endpoint = '', payload = {}, options = {}) => {
+  validateAuth();
+
   const query = payload ? `payload=${encodeURIComponent(aesKit.encrypt(payload))}` : '';
 
   const { useToast = true, title = '', text = '' } = options;
@@ -82,6 +92,8 @@ const get = async (endpoint = '', payload = {}, options = {}) => {
 };
 
 const put = async (endpoint = '', payload = {}, options = {}) => {
+  validateAuth();
+
   if (isEmpty(payload) || typeof payload !== 'object')
     return errorHandler({
       response: {
@@ -115,6 +127,8 @@ const put = async (endpoint = '', payload = {}, options = {}) => {
 };
 
 const del = async (endpoint = '', payload = {}, options = {}) => {
+  validateAuth();
+
   if (!payload?._id)
     return errorHandler({
       response: {
