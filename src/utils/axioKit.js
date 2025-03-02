@@ -12,7 +12,7 @@ const errorHandler = ({ response }) => {
   if (tokenFailure.includes(status)) {
     localStorage.setItem('authenticationFailed', new Date().toDateString());
     message = 'Please relogin.';
-    setTimeout(window.location.reload, 2500);
+    setTimeout(() => window.location.reload(), 2500);
   }
 
   console.error(data);
