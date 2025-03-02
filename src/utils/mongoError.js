@@ -1,5 +1,5 @@
 // MongoDB Error handler
-export function mongoError({ name, message, code, keyValue }) {
+export function mongoError({ name, message, code, keyValue = {} }) {
   if (name === 'MongoServerError' && code === 11000) {
     return {
       code: 409,
@@ -28,9 +28,11 @@ export function mongoError({ name, message, code, keyValue }) {
         // this is a custom keyValue, we can manipulate the output before sending it back
         // convert keyValue to entries, filter with only the keys without a value
         // send it back to the user, telling them that it is required
-        message: Object.entries(keyValue)
-          .filter(([key, val]) => key && !val)
-          .map(([key]) => `[${key}] Is required.`),
+        message:
+          message ||
+          Object.entries(keyValue)
+            .filter(([key, val]) => key && !val)
+            .map(([key]) => `[${key}] Is required.`),
       },
     };
 
