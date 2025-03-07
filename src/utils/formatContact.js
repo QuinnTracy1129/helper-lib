@@ -10,7 +10,7 @@ export function formatContact(str, forSaving = true) {
   // Format as xxx-xxx-xxxx
   return cleaned
     .slice(0, 10)
-    .replace(/(\d{3})(\d{3})(\d{0,4})/, (match, p1, p2, p3) =>
+    .replace(/(\d{3})(\d{3})(\d{0,4})/, (_, p1, p2, p3) =>
       p3 ? `${p1}-${p2}-${p3}` : p2 ? `${p1}-${p2}` : p1,
     );
 }
