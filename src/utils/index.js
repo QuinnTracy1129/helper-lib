@@ -4,6 +4,7 @@ export { formatCurrency } from './formatCurrency.js';
 export { formatString } from './formatString.js';
 export { formatContact } from './formatContact.js';
 export { formatFullname } from './formatFullname.js';
+export { manipulateState } from './manipulateState.js';
 export { isEmpty } from './isEmpty.js';
 export { keywordSearch } from './keywordSearch.js';
 export { toast } from './toast.js';
