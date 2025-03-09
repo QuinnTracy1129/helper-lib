@@ -39,9 +39,12 @@ const find = async (Model, criteria, options = { select: '', remove: '-password'
   }
 };
 
-const create = async (Model, data) => {
+const create = async (Model, data, audit) => {
   try {
-    const payload = await Model.create(data);
+    const payload = await Model.create({
+      ...data,
+      createdBy: audit._id,
+    });
 
     return {
       code: 201,
