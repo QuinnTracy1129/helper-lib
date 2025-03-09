@@ -43,7 +43,7 @@ const create = async (Model, data, audit) => {
   try {
     const payload = await Model.create({
       ...data,
-      createdBy: audit._id,
+      createdBy: audit?._id,
     });
 
     return {
@@ -55,9 +55,32 @@ const create = async (Model, data, audit) => {
   }
 };
 
-const update = async (Model, data) => {
-  // increment __v
-  // improve populate, better if we can pass object, must create sample of nested objectIds
+const update = async (Model, data, audit, options = { criteria: {} }) => {
+  try {
+    const { criteria } = options;
+
+    const payload = await Model.findOneAndUpdate(
+      {
+        _id: data._id,
+        ...criteria,
+      },
+      {
+        $set: {
+          ...data,
+          updatedBy: audit?._id,
+        },
+        $inc: { __v: 1 },
+      },
+      { new: true, runValidators: true },
+    );
+
+    return {
+      code: 200,
+      payload: { ...payload._doc, password: undefined },
+    };
+  } catch (error) {
+    mongoError(error);
+  }
 };
 
 export const mongoKit = {

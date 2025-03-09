@@ -15,7 +15,7 @@ const errorHandler = ({ response }) => {
     setTimeout(() => window.location.reload(), 2500);
   }
 
-  console.error(data);
+  console.error('UI Error:', data);
 
   toast({
     icon: 'error',
