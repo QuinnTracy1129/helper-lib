@@ -57,22 +57,21 @@ const create = async (Model, data, audit) => {
 
 const update = async (Model, data, audit, options = { criteria: {} }) => {
   try {
-    const { criteria } = options;
+    const filter = {
+      _id: data?._id,
+      ...options.criteria,
+    };
 
-    const payload = await Model.findOneAndUpdate(
-      {
-        _id: data._id,
-        ...criteria,
+    await Model.updateOne(filter, {
+      $set: {
+        ...data,
+        updatedBy: audit?._id,
       },
-      {
-        $set: {
-          ...data,
-          updatedBy: audit?._id,
-        },
-        $inc: { __v: 1 },
-      },
-      { new: true, runValidators: true },
-    );
+      $inc: { __v: 1 },
+    });
+
+    // fetch the item to trigger basePopulates
+    const payload = await Model.findOne(filter);
 
     return {
       code: 200,
