@@ -82,9 +82,35 @@ const update = async (Model, data, audit, options = { criteria: {} }) => {
   }
 };
 
+const destroy = async (Model, criteria, audit, options = { softDelete: true }) => {
+  try {
+    const { softDelete } = options;
+
+    if (softDelete) {
+      await Model.updateOne(criteria, {
+        $set: {
+          deletedAt: new Date(),
+          deletedBy: audit?._id,
+        },
+        $inc: { __v: 1 },
+      });
+    } else {
+      await Model.deleteOne(criteria);
+    }
+
+    return {
+      code: 200,
+      payload: criteria,
+    };
+  } catch (error) {
+    mongoError(error);
+  }
+};
+
 export const mongoKit = {
   filter,
   find,
   create,
   update,
+  destroy,
 };
