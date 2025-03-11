@@ -1,16 +1,14 @@
 import { mongoError } from './mongoError.js';
 
-const filter = async (
-  Model,
-  criteria = {},
-  options = { sort: { createdAt: -1 }, select: '', remove: '-password' },
-) => {
+const filter = async (Model, criteria = {}, options = {}) => {
   try {
-    const { select, remove, sort } = options;
+    const { select = '', remove = '-password', sort = { createdAt: -1 }, limit = 0 } = options;
 
     const payload = await Model.find(criteria)
       .select(select || remove)
       .sort(sort)
+      .skip()
+      .limit(limit)
       .lean();
 
     return {
@@ -22,9 +20,9 @@ const filter = async (
   }
 };
 
-const find = async (Model, criteria, options = { select: '', remove: '-password' }) => {
+const find = async (Model, criteria, options = {}) => {
   try {
-    const { select, remove } = options;
+    const { select = '', remove = '-password' } = options;
 
     const payload = await Model.findOne(criteria).select(select || remove);
 
@@ -55,11 +53,11 @@ const create = async (Model, data, audit) => {
   }
 };
 
-const update = async (Model, data, audit, options = { criteria: {} }) => {
+const update = async (Model, data, audit, criteria = {}) => {
   try {
     const filter = {
       _id: data?._id,
-      ...options.criteria,
+      ...criteria,
     };
 
     await Model.updateOne(filter, {
@@ -82,9 +80,9 @@ const update = async (Model, data, audit, options = { criteria: {} }) => {
   }
 };
 
-const destroy = async (Model, criteria, audit, options = { softDelete: true }) => {
+const destroy = async (Model, criteria, audit, options = {}) => {
   try {
-    const { softDelete } = options;
+    const { softDelete = true } = options;
 
     if (softDelete) {
       await Model.updateOne(criteria, {
