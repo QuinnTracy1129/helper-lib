@@ -2,12 +2,18 @@ import { mongoError } from './mongoError.js';
 
 const filter = async (Model, criteria = {}, options = {}) => {
   try {
-    const { select = '', remove = '-password', sort = { createdAt: -1 }, limit = 0 } = options;
+    const {
+      select = '',
+      remove = '-password',
+      sort = { createdAt: -1 },
+      limit = 0,
+      page = 0,
+    } = options;
 
     const payload = await Model.find(criteria)
       .select(select || remove)
       .sort(sort)
-      .skip()
+      .skip(page)
       .limit(limit)
       .lean();
 
