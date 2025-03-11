@@ -1,5 +1,19 @@
 import { mongoError } from './mongoError.js';
 
+const buildCriteria = (criteria = {}) => {
+  const { createdStart, createdEnd, ...rest } = criteria;
+
+  const _criteria = { ...rest };
+
+  // initialize createdAt
+  if (createdStart || createdEnd) _criteria.createdAt = {};
+  // attach gte and lte if it exists
+  if (createdStart) _criteria.createdAt['$gte'] = new Date(createdStart);
+  if (createdEnd) _criteria.createdAt['$lte'] = new Date(createdEnd);
+
+  return _criteria;
+};
+
 const filter = async (Model, criteria = {}, options = {}) => {
   try {
     const {
@@ -10,7 +24,7 @@ const filter = async (Model, criteria = {}, options = {}) => {
       page = 0,
     } = options;
 
-    const payload = await Model.find(criteria)
+    const payload = await Model.find(buildCriteria(criteria))
       .select(select || remove)
       .sort(sort)
       .skip(page)
@@ -30,7 +44,7 @@ const find = async (Model, criteria, options = {}) => {
   try {
     const { select = '', remove = '-password' } = options;
 
-    const payload = await Model.findOne(criteria).select(select || remove);
+    const payload = await Model.findOne(buildCriteria(criteria)).select(select || remove);
 
     if (!payload) return mongoError({ code: 404 });
 
