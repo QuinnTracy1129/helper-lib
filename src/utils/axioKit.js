@@ -4,8 +4,7 @@ import { aesKit } from './aesKit.js';
 import { toast } from './toast.js';
 
 const errorHandler = ({ response = {}, ...rest }) => {
-  alert(JSON.stringify({ response, ...rest }));
-  console.log('Full error:', { response, ...rest });
+  console.error('Full error:', { response, ...rest });
 
   const { data = {}, status = 500 } = response,
     tokenFailure = [401, 403, 406];
