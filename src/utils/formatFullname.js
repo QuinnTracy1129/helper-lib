@@ -31,8 +31,8 @@ export function formatFullname(name, options = {}) {
   // Initially generate a Last, First, Middle direction
   let parsedString = `${lname}, ${fname} ${mname}${suffix}`;
 
-  // Override the value with First, Middle, Last
-  if (direction === 'FML') parsedString = `${fname}, ${mname}${lname}${suffix}`;
+  // Override the value with First Middle Last
+  if (direction === 'FML') parsedString = `${fname} ${mname}${lname}${suffix}`;
 
   // clean the string before returning
   return parsedString.replace(/\s+/g, ' ').trim();

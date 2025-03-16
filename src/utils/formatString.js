@@ -2,8 +2,9 @@ export function formatString(val = '', options = {}) {
   // make sure to parse the val, to make sure we are handling a string
   const str = String(val);
 
-  const { uppercase, lowercase, capitalize, capitalizeAll, kebabCase } = options;
+  const { uppercase, lowercase, capitalize, capitalizeAll, kebabCase, cleanSpaces } = options;
 
+  if (cleanSpaces) return str.trim().replace(/\s+/g, ' ');
   if (kebabCase) return str.toLowerCase().split(' ').join('-');
   if (uppercase) return str.toUpperCase();
   if (lowercase) return str.toLowerCase();
