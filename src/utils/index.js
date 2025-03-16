@@ -1,4 +1,4 @@
-// First 2 exports are just references for future utility functions to be added.
+// First export is just references for future utility functions to be added.
 export { _sayHello } from './_sayHello.js';
 export { formatCurrency } from './formatCurrency.js';
 export { formatString } from './formatString.js';
