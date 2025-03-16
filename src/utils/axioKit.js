@@ -35,13 +35,21 @@ const validateAuth = () => {
   }
 };
 
-let API_HEADER = '';
+let API_HEADER = '',
+  isConfigured = false;
 
 const setConfig = ({ baseURL, header }) => {
-  console.log('Settings Axios config:', { baseURL, header });
   API_HEADER = header;
   axios.defaults.baseURL = baseURL;
   axios.defaults.withCredentials = true;
+  isConfigured = true;
+};
+
+const waitForConfig = async () => {
+  while (!isConfigured) {
+    console.warn('Waiting for Axios config to be set...');
+    await new Promise((resolve) => setTimeout(resolve, 100));
+  }
 };
 
 const getHeader = () => {
@@ -55,6 +63,8 @@ const getHeader = () => {
 };
 
 const post = async (endpoint = '', payload = {}, options = {}) => {
+  await waitForConfig();
+
   validateAuth();
 
   if (isEmpty(payload) || typeof payload !== 'object')
@@ -80,7 +90,7 @@ const post = async (endpoint = '', payload = {}, options = {}) => {
 };
 
 const get = async (endpoint = '', payload = {}, options = {}) => {
-  console.log('Called GET');
+  await waitForConfig();
 
   validateAuth();
 
@@ -99,6 +109,8 @@ const get = async (endpoint = '', payload = {}, options = {}) => {
 };
 
 const put = async (endpoint = '', payload = {}, options = {}) => {
+  await waitForConfig();
+
   validateAuth();
 
   if (isEmpty(payload) || typeof payload !== 'object')
@@ -134,6 +146,8 @@ const put = async (endpoint = '', payload = {}, options = {}) => {
 };
 
 const del = async (endpoint = '', payload = {}, options = {}) => {
+  await waitForConfig();
+
   validateAuth();
 
   if (!payload?._id)
