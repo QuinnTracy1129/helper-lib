@@ -3,7 +3,9 @@ import { isEmpty } from './isEmpty.js';
 import { aesKit } from './aesKit.js';
 import { toast } from './toast.js';
 
-const errorHandler = ({ response }) => {
+const errorHandler = ({ response, ...rest }) => {
+  console.log('Full error:', { response, ...rest });
+
   const { data, status } = response,
     tokenFailure = [401, 403, 406];
 
