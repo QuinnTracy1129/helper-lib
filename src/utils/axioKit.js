@@ -38,6 +38,7 @@ const validateAuth = () => {
 let API_HEADER = '';
 
 const setConfig = ({ baseURL, header }) => {
+  console.log('Settings Axios config:', { baseURL, header });
   API_HEADER = header;
   axios.defaults.baseURL = baseURL;
   axios.defaults.withCredentials = true;
@@ -79,6 +80,8 @@ const post = async (endpoint = '', payload = {}, options = {}) => {
 };
 
 const get = async (endpoint = '', payload = {}, options = {}) => {
+  console.log('Called GET');
+
   validateAuth();
 
   const query = payload ? `payload=${encodeURIComponent(aesKit.encrypt(payload))}` : '';
