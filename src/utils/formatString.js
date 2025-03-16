@@ -8,11 +8,11 @@ export function formatString(val = '', options = {}) {
   if (kebabCase) return str.toLowerCase().split(' ').join('-');
   if (uppercase) return str.toUpperCase();
   if (lowercase) return str.toLowerCase();
-  if (capitalize) return `${str.charAt(0).toUpperCase()}${str.slice(1)}`;
+  if (capitalize) return `${str.charAt(0).toUpperCase()}${str.slice(1).toLowerCase()}`;
   if (capitalizeAll)
     return str
       .split(' ')
-      .map((word) => `${word.charAt(0).toUpperCase()}${word.slice(1)}`)
+      .map((word) => `${word.charAt(0).toUpperCase()}${word.slice(1).toLowerCase()}`)
       .join(' ');
 
   return str;
