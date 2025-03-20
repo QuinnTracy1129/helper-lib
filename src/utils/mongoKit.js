@@ -50,7 +50,7 @@ const find = async (Model, criteria, options = {}) => {
 
     return {
       code: 200,
-      payload,
+      payload: { ...payload?._doc },
     };
   } catch (error) {
     return mongoError(error);
