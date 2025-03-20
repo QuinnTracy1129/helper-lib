@@ -13,6 +13,7 @@ export { logout } from './logout.js';
 export { mongoError } from './mongoError.js';
 export { mongoReferenceExists } from './mongoReferenceExists.js';
 export { generateChatNameFromMembers } from './generateChatNameFromMembers.js';
+export { outputCreator } from './outputCreator.js';
 export { mongoKit } from './mongoKit.js';
 export { axioKit } from './axioKit.js';
 export { aesKit } from './aesKit.js';
