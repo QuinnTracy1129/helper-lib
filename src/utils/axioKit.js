@@ -19,11 +19,12 @@ const errorHandler = ({ response = {}, ...rest }) => {
 
   console.error('UI Error:', data);
 
-  toast({
-    icon: 'error',
-    title,
-    text: message.length < 30 ? message : 'Open console to debug.',
-  });
+  if (title)
+    toast({
+      icon: 'error',
+      title,
+      text: message.length < 30 ? message : 'Open console to debug.',
+    });
   throw new Error(data.error);
 };
 
