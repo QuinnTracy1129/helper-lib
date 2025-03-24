@@ -74,6 +74,7 @@ const create = async (Model, data, audit) => {
   }
 };
 
+// based on research, there are risks on using push along set and unset, so be careful.
 const update = async (Model, data, audit, unset = {}, push = {}, criteria = {}) => {
   try {
     const filter = {
