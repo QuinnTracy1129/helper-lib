@@ -1,4 +1,5 @@
 import { mongoError } from './mongoError.js';
+import { isEmpty } from './isEmpty.js';
 
 const buildCriteria = (criteria = {}) => {
   const { createdStart, createdEnd, ...rest } = criteria;
@@ -73,7 +74,7 @@ const create = async (Model, data, audit) => {
   }
 };
 
-const update = async (Model, data, audit, criteria = {}) => {
+const update = async (Model, data, audit, unset = {}, criteria = {}) => {
   try {
     const filter = {
       _id: data?._id,
@@ -85,6 +86,7 @@ const update = async (Model, data, audit, criteria = {}) => {
         ...data,
         updatedBy: audit?._id,
       },
+      ...(!isEmpty(unset) && { $unset: unset }),
       $inc: { __v: 1 },
     });
 
