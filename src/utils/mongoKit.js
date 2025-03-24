@@ -74,7 +74,7 @@ const create = async (Model, data, audit) => {
   }
 };
 
-const update = async (Model, data, audit, unset = {}, criteria = {}) => {
+const update = async (Model, data, audit, unset = {}, push = {}, criteria = {}) => {
   try {
     const filter = {
       _id: data?._id,
@@ -87,6 +87,7 @@ const update = async (Model, data, audit, unset = {}, criteria = {}) => {
         updatedBy: audit?._id,
       },
       ...(!isEmpty(unset) && { $unset: unset }),
+      ...(!isEmpty(push) && { $push: push }),
       $inc: { __v: 1 },
     });
 
