@@ -62,7 +62,7 @@ const create = async (Model, data, audit) => {
   try {
     const payload = await Model.create({
       ...data,
-      createdBy: audit?._id,
+      ...(!isEmpty(audit) && { createdBy: audit?._id }),
     });
 
     return {
