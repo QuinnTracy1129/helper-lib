@@ -68,7 +68,9 @@ const getHeader = () => {
 const post = async (endpoint = '', payload = {}, options = {}) => {
   await waitForConfig();
 
-  validateAuth();
+  const { useToast = true, title = '', text = '', isAuthenticated = true } = options;
+
+  if (isAuthenticated) validateAuth();
 
   if (isEmpty(payload) || typeof payload !== 'object')
     return errorHandler({
@@ -79,8 +81,6 @@ const post = async (endpoint = '', payload = {}, options = {}) => {
         },
       },
     });
-
-  const { useToast = true, title = '', text = '' } = options;
 
   return await axios
     .post(endpoint, { payload: aesKit.encrypt(payload) }, getHeader())
@@ -95,11 +95,11 @@ const post = async (endpoint = '', payload = {}, options = {}) => {
 const get = async (endpoint = '', payload = {}, options = {}) => {
   await waitForConfig();
 
-  validateAuth();
+  const { useToast = true, title = '', text = '', isAuthenticated = true } = options;
+
+  if (isAuthenticated) validateAuth();
 
   const query = payload ? `payload=${encodeURIComponent(aesKit.encrypt(payload))}` : '';
-
-  const { useToast = true, title = '', text = '' } = options;
 
   return await axios
     .get(`${endpoint}?${query}`, getHeader())
@@ -114,7 +114,9 @@ const get = async (endpoint = '', payload = {}, options = {}) => {
 const put = async (endpoint = '', payload = {}, options = {}) => {
   await waitForConfig();
 
-  validateAuth();
+  const { useToast = true, title = '', text = '', isAuthenticated = true } = options;
+
+  if (isAuthenticated) validateAuth();
 
   if (isEmpty(payload) || typeof payload !== 'object')
     return errorHandler({
@@ -135,8 +137,6 @@ const put = async (endpoint = '', payload = {}, options = {}) => {
         },
       },
     });
-
-  const { useToast = true, title = '', text = '' } = options;
 
   return await axios
     .put(endpoint, { payload: aesKit.encrypt(payload) }, getHeader())
