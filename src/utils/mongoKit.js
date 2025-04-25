@@ -45,7 +45,9 @@ const find = async (Model, criteria, options = {}) => {
   try {
     const { select = '', remove = '-password' } = options;
 
-    const payload = await Model.findOne(buildCriteria(criteria)).select(select || remove);
+    const payload = await Model.findOne(buildCriteria(criteria))
+      .select(select || remove)
+      .lean();
 
     if (!payload) return mongoError({ code: 404 });
 
