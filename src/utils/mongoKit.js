@@ -53,7 +53,8 @@ const find = async (Model, criteria, options = {}) => {
 
     return {
       code: 200,
-      payload: { ...payload?._doc },
+      // payload: { ...payload?._doc },
+      payload,
     };
   } catch (error) {
     return mongoError(error);
