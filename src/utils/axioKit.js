@@ -106,6 +106,13 @@ const get = async (endpoint = '', payload = {}, options = {}) => {
     .then(({ data }) => {
       if (useToast) toast({ icon: 'success', title: title || 'Success', text });
 
+      console.log(
+        aesKit.decrypt(
+          'U2FsdGVkX19epCVIQoN0c4Fvys2CSB5qQwkiyhW/GUq5/bKmHd+4xFJ1me4hUAF5PWA1F207Cq27qmmxSUzyOw==',
+          'test',
+        ),
+      );
+
       return aesKit.decrypt(data.payload);
     })
     .catch(errorHandler);
