@@ -1,4 +1,7 @@
+// RULES
+// Strictly follows camel-casing for both function and file names
 // First export is just references for future utility functions to be added.
+
 export { _sayHello } from './_sayHello.js';
 export { formatCurrency } from './formatCurrency.js';
 export { formatString } from './formatString.js';
@@ -18,6 +21,3 @@ export { outputCreator } from './outputCreator.js';
 export { mongoKit } from './mongoKit.js';
 export { axioKit } from './axioKit.js';
 export { aesKit } from './aesKit.js';
-
-// RULES
-// Strictly follows camel-casing for both function and file names

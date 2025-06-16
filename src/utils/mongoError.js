@@ -1,5 +1,6 @@
 // MongoDB Error handler
 export function mongoError({ name, message, code, keyValue = {} }) {
+  // This is a valid mongo error
   if (name === 'MongoServerError' && code === 11000) {
     return {
       code: 409,
@@ -11,6 +12,7 @@ export function mongoError({ name, message, code, keyValue = {} }) {
     };
   }
 
+  // This is a custom error
   if (code === 404)
     return {
       code,
@@ -20,6 +22,7 @@ export function mongoError({ name, message, code, keyValue = {} }) {
       },
     };
 
+  // This is a custom error
   if (code === 400)
     return {
       code,
@@ -36,6 +39,7 @@ export function mongoError({ name, message, code, keyValue = {} }) {
       },
     };
 
+  // Fallback error
   return {
     code: 500,
     payload: {
