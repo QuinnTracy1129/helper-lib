@@ -3,6 +3,7 @@
 // First export is just references for future utility functions to be added.
 
 export { _sayHello } from './_sayHello.js';
+export { inputDateMin } from './inputDateMin.js';
 export { formatCurrency } from './formatCurrency.js';
 export { formatString } from './formatString.js';
 export { formatContact } from './formatContact.js';
