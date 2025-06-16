@@ -1,4 +1,4 @@
-export function formatContact(str, forSaving = true) {
+export function formatContact(str, forSaving = false) {
   if (forSaving) {
     // Remove all hyphens for saving
     return str.replace(/-/g, '');
