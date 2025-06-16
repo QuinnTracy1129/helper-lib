@@ -13,7 +13,7 @@ const errorHandler = ({ response = {}, ...rest }) => {
 
   if (tokenFailure.includes(status)) {
     localStorage.setItem('authenticationFailed', new Date().toDateString());
-    message = 'Please relogin.';
+    message = 'Please relogin';
     setTimeout(() => window.location.reload(), 2500);
   }
 
@@ -23,7 +23,7 @@ const errorHandler = ({ response = {}, ...rest }) => {
     toast({
       icon: 'error',
       title,
-      text: message.length < 30 ? message : 'Open console to debug.',
+      text: message.length < 30 ? message : 'Open console to debug',
     });
   throw new Error(data.error);
 };
@@ -33,8 +33,8 @@ const validateAuth = () => {
 
   // if token is deemed to be expired, we shall stop all api calls at all.
   if (isExpired) {
-    console.warn('Credentials are expired.');
-    throw new Error('Please relogin.');
+    console.warn('Credentials are expired');
+    throw new Error('Please relogin');
   }
 };
 
@@ -77,7 +77,7 @@ const post = async (endpoint = '', payload = {}, options = {}) => {
       response: {
         data: {
           error: 'INVALID_PAYLOAD',
-          message: 'Payload is empty.',
+          message: 'Payload is empty',
         },
       },
     });
@@ -123,7 +123,7 @@ const put = async (endpoint = '', payload = {}, options = {}) => {
       response: {
         data: {
           error: 'INVALID_PAYLOAD',
-          message: 'Payload is empty.',
+          message: 'Payload is empty',
         },
       },
     });
@@ -133,7 +133,7 @@ const put = async (endpoint = '', payload = {}, options = {}) => {
       response: {
         data: {
           error: 'INVALID_PARAMETERS',
-          message: 'Identifier is missing.',
+          message: 'Identifier is missing',
         },
       },
     });
@@ -158,7 +158,7 @@ const del = async (endpoint = '', payload = {}, options = {}) => {
       response: {
         data: {
           error: 'INVALID_PARAMETERS',
-          message: 'Identifier is missing.',
+          message: 'Identifier is missing',
         },
       },
     });

@@ -18,7 +18,7 @@ export function mongoError({ name, message, code, keyValue = {} }) {
       code,
       payload: {
         error: 'NOT_FOUND',
-        message: 'Nothing was matched.',
+        message: 'Nothing was matched',
       },
     };
 
@@ -35,7 +35,7 @@ export function mongoError({ name, message, code, keyValue = {} }) {
           message ||
           Object.entries(keyValue)
             .filter(([key, val]) => key && !val)
-            .map(([key]) => `[${key}] Is required.`),
+            .map(([key]) => `[${key}] Is required`),
       },
     };
 
