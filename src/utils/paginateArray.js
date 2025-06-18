@@ -1,3 +1,6 @@
-export function paginateArray(array, currentPage, maxPage) {
-  return array.slice((currentPage - 1) * maxPage, maxPage + (currentPage - 1) * maxPage);
+export function paginateArray(array, currentPage, maxItemPerPage) {
+  return array.slice(
+    (currentPage - 1) * maxItemPerPage,
+    maxItemPerPage + (currentPage - 1) * maxItemPerPage,
+  );
 }
