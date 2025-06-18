@@ -14,7 +14,7 @@ import Footer from './footer.jsx';
 import Header from './header.jsx';
 import Table from './table.jsx';
 
-export default function DataTable({
+export function DataTable({
   id = '', // identifier used for html `key`'s
   payload = [], // array of data that needs to be processed
   columns = [], // columns titles to be shown
