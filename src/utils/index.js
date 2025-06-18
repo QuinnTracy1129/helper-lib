@@ -4,6 +4,7 @@
 
 export { _sayHello } from './_sayHello.js';
 export { inputDateMin } from './inputDateMin.js';
+export { paginateArray } from './paginateArray.js';
 export { formatCurrency } from './formatCurrency.js';
 export { formatString } from './formatString.js';
 export { formatContact } from './formatContact.js';
