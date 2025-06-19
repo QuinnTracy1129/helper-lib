@@ -25,7 +25,7 @@ export default function Header({
 
   return (
     <div className="flex flex-col-reverse sm:flex-row items-center justify-between mb-2">
-      {removeSearch && (
+      {!removeSearch && (
         <div>
           <label className="input focus-within:outline-0 w-full lg:w-96 transition-all rounded-none">
             <svg
