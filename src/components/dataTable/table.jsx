@@ -56,7 +56,7 @@ const Body = ({
   if (isLoading)
     return Array.from({ length: maxItemPerPage }).map((_, index) => {
       return (
-        <tr key={`skeleton-${id}-${index}`}>
+        <tr key={`skeleton-${id}-${index}`} className="animate-pulse">
           <td colSpan={expectedColumnSpan}>
             <div className="h-7 rounded bg-neutral-content w-full" />
           </td>
