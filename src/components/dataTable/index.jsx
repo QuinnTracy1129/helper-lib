@@ -71,6 +71,7 @@ export function DataTable({
         setSearchStr={setSearchStr}
       />
       <Table
+        isLoading={isLoading}
         id={id}
         payload={filteredPayload}
         columns={columns}

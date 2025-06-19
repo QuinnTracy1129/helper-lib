@@ -33,6 +33,7 @@ const Head = ({ id = '', columns = [], columnConfig, showAction = false }) => {
 };
 
 const Body = ({
+  isLoading = false,
   id = '',
   showIndex = false,
   payload = [],
@@ -50,13 +51,23 @@ const Body = ({
     [payload, currentPage, maxItemPerPage],
   );
 
+  const expectedColumnSpan = headerCount + (showIndex ? 1 : 0) + (rowActions.length ? 1 : 0);
+
+  if (isLoading)
+    return Array.from({ length: maxItemPerPage }).map((_, index) => {
+      return (
+        <tr key={`skeleton-${id}-${index}`}>
+          <td colSpan={expectedColumnSpan}>
+            <div className="h-7 rounded bg-neutral-content w-full" />
+          </td>
+        </tr>
+      );
+    });
+
   if (isPayloadEmpty)
     return (
       <tr>
-        <td
-          colSpan={headerCount + (showIndex ? 1 : 0) + (rowActions.length ? 1 : 0)}
-          className="text-center border-b border-gray-300"
-        >
+        <td colSpan={expectedColumnSpan} className="text-center border-b border-gray-300">
           No recent entries for <span className="font-semibold">{id}</span>
         </td>
       </tr>
@@ -145,6 +156,7 @@ const Body = ({
 };
 
 export default function Table({
+  isLoading,
   id,
   payload,
   columns = [],
@@ -163,6 +175,7 @@ export default function Table({
       <Head id={id} columns={columns} columnConfig={columnConfig} showAction={showAction} />
       <tbody>
         <Body
+          isLoading={isLoading}
           id={id}
           headerCount={columns.length}
           showIndex={columnConfig.showIndex}
