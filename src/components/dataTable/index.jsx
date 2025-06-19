@@ -74,20 +74,22 @@ export function DataTable({
         setSearchStr={setSearchStr}
         removeSearch={removeSearch}
       />
-      <Table
-        isLoading={isLoading}
-        id={id}
-        payload={filteredPayload}
-        columns={columns}
-        columnConfig={columnConfig}
-        rows={rows}
-        rowConfig={rowConfig}
-        rowActions={rowActions}
-        currentPage={currentPage}
-        maxItemPerPage={maxItemPerPage}
-        isPayloadEmpty={isPayloadEmpty}
-        zebra={zebra}
-      />
+      <div className="overflow-x-auto">
+        <Table
+          isLoading={isLoading}
+          id={id}
+          payload={filteredPayload}
+          columns={columns}
+          columnConfig={columnConfig}
+          rows={rows}
+          rowConfig={rowConfig}
+          rowActions={rowActions}
+          currentPage={currentPage}
+          maxItemPerPage={maxItemPerPage}
+          isPayloadEmpty={isPayloadEmpty}
+          zebra={zebra}
+        />
+      </div>
       <Footer
         id={id}
         isLoading={isLoading}
