@@ -3,6 +3,7 @@
 // First export is just references for future utility functions to be added.
 
 export { _sayHello } from './_sayHello.js';
+export { sleep } from './sleep.js';
 export { inputDateMin } from './inputDateMin.js';
 export { paginateArray } from './paginateArray.js';
 export { formatCurrency } from './formatCurrency.js';
