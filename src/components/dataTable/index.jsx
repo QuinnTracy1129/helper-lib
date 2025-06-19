@@ -32,7 +32,7 @@ export function DataTable({
 }) {
   const [currentPage, setCurrentPage] = useState(1),
     [maxItemPerPage, setMaxItemPerPage] = useState(() =>
-      Number(localStorage.getItem('maxItemPerPage') || 10),
+      Number(localStorage.getItem(`${id}-maxItemPerPage`) || 10),
     ),
     [searchStr, setSearchStr] = useState(''),
     debouncedSearchStr = useDebounce(searchStr),
@@ -57,7 +57,7 @@ export function DataTable({
 
   const handleMaxItemPerPageChange = (value) => {
     setMaxItemPerPage(value);
-    localStorage.setItem('maxItemPerPage', value);
+    localStorage.setItem(`${id}-maxItemPerPage`, value);
   };
 
   const isPayloadEmpty = !filteredPayload.length;
