@@ -1,6 +1,9 @@
 import { useEffect, useRef } from 'react';
 
+const paginationOptions = [5, 10, 25, 50, 100];
+
 export default function Header({
+  id,
   isLoading,
   isPayloadEmpty,
   maxItemPerPage,
@@ -68,10 +71,11 @@ export default function Header({
             onChange={({ target }) => handleMaxItemPerPageChange(Number(target.value))}
             className="select rounded-none w-full focus:outline-0"
           >
-            <option value="10">10</option>
-            <option value="25">25</option>
-            <option value="50">50</option>
-            <option value="100">100</option>
+            {paginationOptions.map((value, index) => (
+              <option key={`page-options-${id}-${index}`} value={value}>
+                {value}
+              </option>
+            ))}
           </select>
         </fieldset>
         <div>&nbsp;entries per page</div>

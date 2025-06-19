@@ -65,6 +65,7 @@ export function DataTable({
   return (
     <div>
       <Header
+        id={id}
         isLoading={isLoading}
         isPayloadEmpty={isPayloadEmpty}
         maxItemPerPage={maxItemPerPage}
