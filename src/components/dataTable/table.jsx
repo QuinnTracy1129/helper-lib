@@ -167,11 +167,12 @@ export default function Table({
   currentPage,
   maxItemPerPage,
   isPayloadEmpty,
+  zebra,
 }) {
   const showAction = Boolean(rowActions.length);
 
   return (
-    <table className="table table-auto table-md table-zebra">
+    <table className={`table table-auto table-md ${zebra && 'table-zebra'}`}>
       <Head id={id} columns={columns} columnConfig={columnConfig} showAction={showAction} />
       <tbody>
         <Body

@@ -26,7 +26,8 @@ export function DataTable({
   rowConfig = {}, // row content config
   rowActions = [], // action buttons for each row
   pageButtonRange = 3, // page button range to be shown
-  customSearch,
+  customSearch, // a function that will be triggered when we search
+  zebra = false, // adds the `table-zebra` class
 }) {
   const [currentPage, setCurrentPage] = useState(1),
     [maxItemPerPage, setMaxItemPerPage] = useState(() =>
@@ -82,6 +83,7 @@ export function DataTable({
         currentPage={currentPage}
         maxItemPerPage={maxItemPerPage}
         isPayloadEmpty={isPayloadEmpty}
+        zebra={zebra}
       />
       <Footer
         id={id}
