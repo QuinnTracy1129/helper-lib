@@ -1,4 +1,6 @@
 export default function Footer({
+  id,
+  isLoading,
   currentPage,
   setCurrentPage,
   maxItemPerPage,
@@ -42,7 +44,7 @@ export default function Footer({
       )}
       <div className="join">
         <button
-          disabled={isPayloadEmpty || currentPage <= 1}
+          disabled={isPayloadEmpty || currentPage <= 1 || isLoading}
           onClick={() => handlePageClick(currentPage - 1)}
           className="btn join-item btn-sm btn-outline btn-primary"
         >
@@ -51,7 +53,8 @@ export default function Footer({
 
         {getVisiblePages().map((pageNum) => (
           <button
-            key={pageNum}
+            key={`pageNavigation-${id}-${pageNum}`}
+            disabled={isPayloadEmpty || isLoading}
             onClick={() => handlePageClick(pageNum)}
             className={`btn join-item btn-sm btn-outline ${
               pageNum === currentPage ? 'btn-active btn-primary' : 'btn-primary'
@@ -62,7 +65,7 @@ export default function Footer({
         ))}
 
         <button
-          disabled={isPayloadEmpty || currentPage >= totalPages}
+          disabled={isPayloadEmpty || currentPage >= totalPages || isLoading}
           onClick={() => handlePageClick(currentPage + 1)}
           className="btn join-item btn-sm btn-outline btn-primary"
         >

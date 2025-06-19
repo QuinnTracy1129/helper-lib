@@ -17,6 +17,7 @@ import { useDebounce } from '../useDebounce.jsx';
 import { keywordSearch } from '../../utils/keywordSearch.js';
 
 export function DataTable({
+  isLoading = false, // identifier use to check if data is loading
   id = '', // identifier used for html `key`'s
   payload = [], // array of data that needs to be processed
   columns = [], // columns titles to be shown
@@ -62,6 +63,7 @@ export function DataTable({
   return (
     <div>
       <Header
+        isLoading={isLoading}
         isPayloadEmpty={isPayloadEmpty}
         maxItemPerPage={maxItemPerPage}
         handleMaxItemPerPageChange={handleMaxItemPerPageChange}
@@ -81,6 +83,8 @@ export function DataTable({
         isPayloadEmpty={isPayloadEmpty}
       />
       <Footer
+        id={id}
+        isLoading={isLoading}
         pageButtonRange={pageButtonRange}
         currentPage={currentPage}
         setCurrentPage={setCurrentPage}

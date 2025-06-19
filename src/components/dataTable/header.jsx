@@ -1,6 +1,7 @@
 import { useEffect, useRef } from 'react';
 
 export default function Header({
+  isLoading,
   isPayloadEmpty,
   maxItemPerPage,
   handleMaxItemPerPageChange,
@@ -43,7 +44,7 @@ export default function Header({
           </svg>
           <input
             // only disable the search if the payload is empty and we are not searching
-            disabled={isPayloadEmpty && !searchStr}
+            disabled={(isPayloadEmpty && !searchStr) || isLoading}
             ref={dataTableSearchRef}
             type="search"
             value={searchStr}
@@ -58,7 +59,7 @@ export default function Header({
       <div className="flex items-center">
         <fieldset className="fieldset mr-1">
           <select
-            disabled={isPayloadEmpty}
+            disabled={isPayloadEmpty || isLoading}
             value={String(maxItemPerPage)}
             onChange={({ target }) => handleMaxItemPerPageChange(Number(target.value))}
             className="select rounded-none w-full focus:outline-0"
@@ -69,7 +70,7 @@ export default function Header({
             <option value="100">100</option>
           </select>
         </fieldset>
-        entries per page
+        <div>entries per page</div>
       </div>
     </div>
   );
