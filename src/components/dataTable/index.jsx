@@ -9,6 +9,9 @@
 // make them clickable
 // can output custom components or html
 // can pass custom CSS
+
+// Known Issues:
+// not passing `payload` results to infinite loop, but passing empty `array` removes the error
 import { useEffect, useMemo, useRef, useState } from 'react';
 import Footer from './footer.jsx';
 import Header from './header.jsx';
