@@ -57,7 +57,7 @@ export default function Header({
         </label>
       </div>
       <div className="flex items-center">
-        <fieldset className="fieldset mr-1">
+        <fieldset className="fieldset">
           <select
             disabled={isPayloadEmpty || isLoading}
             value={String(maxItemPerPage)}
@@ -70,7 +70,7 @@ export default function Header({
             <option value="100">100</option>
           </select>
         </fieldset>
-        <div>entries per page</div>
+        <div>&nbsp;entries per page</div>
       </div>
     </div>
   );

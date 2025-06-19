@@ -1,4 +1,4 @@
-import { paginateArray } from '../../utils/paginateArray.js';
+import { paginateArray } from 'helper-lib/utils';
 import { useMemo } from 'react';
 
 const Head = ({ id = '', columns = [], columnConfig, showAction = false }) => {
@@ -71,7 +71,7 @@ const Body = ({
   return paginatedData.map((obj, x) => {
     const globalIndex = (currentPage - 1) * maxItemPerPage + x;
 
-    const renderCell = (objKey, format, isOptional) => {
+    const renderCell = (_, objKey, format, isOptional) => {
       const keyExists = Object.prototype.hasOwnProperty.call(obj, objKey);
 
       // if key does not exist and is required, return fallback
@@ -103,10 +103,14 @@ const Body = ({
               condition = () => true,
               style = {},
               className = '',
+              // if `customRender` is passed `objKey`, `format` and `isOptional` are obsolete
+              customRender,
             },
             y,
           ) => {
             if (!condition(obj)) return null;
+
+            const safeRender = customRender ?? renderCell;
 
             return (
               <td
@@ -114,7 +118,7 @@ const Body = ({
                 style={style}
                 className={`${globalRowClassname} ${className}`}
               >
-                {renderCell(objKey, format, isOptional)}
+                {safeRender(obj, objKey, format, isOptional)}
               </td>
             );
           },
