@@ -62,7 +62,6 @@ export function DataTable({
 
   return (
     <div>
-      <div className="animate-pulse h-5 rounded-xs bg-neutral-content" />
       <Header
         isLoading={isLoading}
         isPayloadEmpty={isPayloadEmpty}
