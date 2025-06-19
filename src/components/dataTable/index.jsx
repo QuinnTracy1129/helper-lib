@@ -48,6 +48,7 @@ export function DataTable({
 
   const filteredPayload = useMemo(() => {
     if (isRemoteSearch) return payload;
+    setCurrentPage(1); // reset current page upon searching
     return keywordSearch(payload, debouncedSearchStr);
   }, [payload, debouncedSearchStr, isRemoteSearch]);
 
