@@ -25,7 +25,7 @@ export function DataTable({
   rows = [], // each rows to be shown
   rowConfig = {}, // row content config
   rowActions = [], // action buttons for each row
-  pageButtonRange = 3, // page button range to be shown
+  pageButtonRange = 2, // page button range to be shown
   customSearch, // a function that will be triggered when we search
   zebra = false, // adds the `table-zebra` class
   removeSearch = false, // removes the search input
