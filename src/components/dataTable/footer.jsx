@@ -34,7 +34,8 @@ export default function Footer({
     <div
       className={`flex items-center justify-center ${!isPayloadEmpty && 'sm:justify-between'} mt-2`}
     >
-      {isLoading && <div className="animate-pulse h-5 rounded-xs bg-gray-300" />}
+      <div className="animate-pulse h-5 rounded-xs bg-neutral-content" />
+      {isLoading && <div className="animate-pulse h-5 rounded-xs bg-neutral-content" />}
       {!isPayloadEmpty && !isLoading && (
         <div className="text-neutral hidden sm:block">
           Showing&nbsp;<span className="tabular-nums">{start}</span>&nbsp;to&nbsp;
