@@ -28,6 +28,7 @@ export function DataTable({
   pageButtonRange = 3, // page button range to be shown
   customSearch, // a function that will be triggered when we search
   zebra = false, // adds the `table-zebra` class
+  removeSearch = false, // removes the search input
 }) {
   const [currentPage, setCurrentPage] = useState(1),
     [maxItemPerPage, setMaxItemPerPage] = useState(() =>
@@ -70,6 +71,7 @@ export function DataTable({
         handleMaxItemPerPageChange={handleMaxItemPerPageChange}
         searchStr={searchStr}
         setSearchStr={setSearchStr}
+        removeSearch={removeSearch}
       />
       <Table
         isLoading={isLoading}
