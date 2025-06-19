@@ -1,4 +1,26 @@
-export default function Header({ isPayloadEmpty, maxItemPerPage, handleMaxItemPerPageChange }) {
+import { useEffect, useRef } from 'react';
+
+export default function Header({
+  isPayloadEmpty,
+  maxItemPerPage,
+  handleMaxItemPerPageChange,
+  searchStr,
+  setSearchStr,
+}) {
+  const dataTableSearchRef = useRef(null);
+
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      if (e.ctrlKey && e.key.toLowerCase() === 'k') {
+        e.preventDefault();
+        dataTableSearchRef.current?.focus();
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyDown, { capture: true });
+    return () => window.removeEventListener('keydown', handleKeyDown, { capture: true });
+  }, []);
+
   return (
     <div className="flex flex-col-reverse sm:flex-row items-center justify-between mb-2">
       <div>
@@ -20,11 +42,12 @@ export default function Header({ isPayloadEmpty, maxItemPerPage, handleMaxItemPe
             </g>
           </svg>
           <input
-            disabled={isPayloadEmpty}
-            //   ref={searchInputRef}
+            // only disable the search if the payload is empty and we are not searching
+            disabled={isPayloadEmpty && !searchStr}
+            ref={dataTableSearchRef}
             type="search"
-            //   value={localSearchValue}
-            //   onChange={({ target }) => setLocalSearchValue(target.value)}
+            value={searchStr}
+            onChange={({ target }) => setSearchStr(target.value)}
             className="grow"
             placeholder="Keyword Search..."
           />
