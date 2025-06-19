@@ -25,8 +25,8 @@ export default function Header({
 
   return (
     <div className="flex flex-col-reverse sm:flex-row items-center justify-between mb-2">
-      {!removeSearch && (
-        <div>
+      <div>
+        {!removeSearch && (
           <label className="input focus-within:outline-0 w-full lg:w-96 transition-all rounded-none">
             <svg
               className="h-[1em] opacity-50"
@@ -57,8 +57,9 @@ export default function Header({
             <kbd className="kbd kbd-sm">Ctrl</kbd>
             <kbd className="kbd kbd-sm">K</kbd>
           </label>
-        </div>
-      )}
+        )}
+      </div>
+
       <div className="flex items-center">
         <fieldset className="fieldset">
           <select
