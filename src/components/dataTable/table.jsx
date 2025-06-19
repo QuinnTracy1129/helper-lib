@@ -1,5 +1,6 @@
-import { paginateArray } from 'helper-lib/utils';
 import { useMemo } from 'react';
+import { isEmpty } from '../../utils/isEmpty.js';
+import { paginateArray } from '../../utils/paginateArray.js';
 
 const Head = ({ id = '', columns = [], columnConfig, showAction = false }) => {
   const {
@@ -169,7 +170,7 @@ export default function Table({
   isPayloadEmpty,
   zebra,
 }) {
-  const showAction = Boolean(rowActions.length);
+  const showAction = !isEmpty(rowActions);
 
   return (
     <table className={`table table-auto table-md ${zebra && 'table-zebra'}`}>

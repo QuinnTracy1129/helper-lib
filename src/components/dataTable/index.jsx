@@ -15,6 +15,7 @@ import Header from './header.jsx';
 import Table from './table.jsx';
 import { useDebounce } from '../useDebounce.jsx';
 import { keywordSearch } from '../../utils/keywordSearch.js';
+import { isEmpty } from '../../utils/isEmpty.js';
 
 export function DataTable({
   isLoading = false, // identifier use to check if data is loading
@@ -60,7 +61,7 @@ export function DataTable({
     localStorage.setItem(`${id}-maxItemPerPage`, value);
   };
 
-  const isPayloadEmpty = !filteredPayload.length;
+  const isPayloadEmpty = isEmpty(filteredPayload);
 
   return (
     <div>
