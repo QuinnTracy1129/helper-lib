@@ -62,7 +62,7 @@ export default function Footer({
             onClick={() => handlePageClick(pageNum)}
             className={`btn join-item btn-sm btn-outline ${
               pageNum === currentPage ? 'btn-active btn-primary' : 'btn-primary'
-            }`}
+            } tabular-nums`}
           >
             {pageNum}
           </button>
