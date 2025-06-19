@@ -58,7 +58,7 @@ const Body = ({
       return (
         <tr key={`skeleton-${id}-${index}`} className="animate-pulse">
           <td colSpan={expectedColumnSpan}>
-            <div className="h-7 rounded bg-neutral-content w-full" />
+            <div className="h-4 md:h-6 rounded bg-neutral-content w-full" />
           </td>
         </tr>
       );
