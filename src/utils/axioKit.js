@@ -99,7 +99,7 @@ const get = async (endpoint = '', payload = {}, options = {}) => {
 
   if (isAuthenticated) validateAuth();
 
-  const query = payload ? `payload=${encodeURIComponent(aesKit.encrypt(payload))}` : '';
+  const query = isEmpty(payload) ? '' : `payload=${encodeURIComponent(aesKit.encrypt(payload))}`;
 
   return await axios
     .get(`${endpoint}?${query}`, getHeader())
