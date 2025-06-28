@@ -114,7 +114,7 @@ const get = async (endpoint = '', payload = {}, options = {}) => {
 const put = async (endpoint = '', payload = {}, options = {}) => {
   await waitForConfig();
 
-  const { useToast = true, title = '', text = '', isAuthenticated = true } = options;
+  const { useToast = true, title = '', text = '', isAuthenticated = true, useId = true } = options;
 
   if (isAuthenticated) validateAuth();
 
@@ -128,7 +128,7 @@ const put = async (endpoint = '', payload = {}, options = {}) => {
       },
     });
 
-  if (!payload?._id)
+  if (useId && !payload?._id)
     return errorHandler({
       response: {
         data: {
