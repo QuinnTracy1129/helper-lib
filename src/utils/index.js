@@ -11,6 +11,7 @@ export { formatString } from './formatString.js';
 export { formatContact } from './formatContact.js';
 export { formatFullname } from './formatFullname.js';
 export { formatDate } from './formatDate.js';
+export { fetchLocalStorage } from './fetchLocalStorage.js';
 export { manipulateState } from './manipulateState.js';
 export { isEmpty } from './isEmpty.js';
 export { keywordSearch } from './keywordSearch.js';
