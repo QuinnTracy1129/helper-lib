@@ -43,10 +43,11 @@ const filter = async (Model, criteria = {}, options = {}) => {
 
 const find = async (Model, criteria, options = {}) => {
   try {
-    const { select = '', remove = '-password' } = options;
+    const { select = '', remove = '-password', sort = { createdAt: -1 } } = options;
 
     const payload = await Model.findOne(buildCriteria(criteria))
       .select(select || remove)
+      .sort(sort)
       .lean();
 
     if (!payload) return mongoError({ code: 404 });
