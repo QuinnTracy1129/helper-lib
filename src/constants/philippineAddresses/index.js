@@ -1,7 +1,7 @@
-import regions from './1_regions';
-import provinces from './2_provinces';
-import cityMun from './3_city-mun';
-import barangays from './4_barangays';
+import regions from './1_regions.js';
+import provinces from './2_provinces.js';
+import cityMun from './3_city-mun.js';
+import barangays from './4_barangays.js';
 import { isEmpty } from '../../utils/isEmpty.js';
 
 const getCodeByName = (data, name) => data.find((item) => item.name === name)?.code;
