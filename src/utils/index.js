@@ -22,6 +22,7 @@ export { mongoReferenceExists } from './mongoReferenceExists.js';
 export { generateChatNameFromMembers } from './generateChatNameFromMembers.js';
 export { generateSlug } from './generateSlug.js';
 export { outputCreator } from './outputCreator.js';
+export { generatePassword } from './generatePassword.js';
 export { mongoKit } from './mongoKit.js';
 export { axioKit } from './axioKit.js';
 export { aesKit } from './aesKit.js';
