@@ -134,7 +134,7 @@ const Body = ({
               <td
                 key={`cell-${id}-${globalIndex}-${y}`}
                 style={style}
-                className={`${globalRowClassname} ${className} ${!visible() && 'invisible'}`}
+                className={`${globalRowClassname} ${className} ${!visible(obj) && 'invisible'}`}
               >
                 {safeRender(obj, objKey, format, isOptional)}
               </td>
@@ -159,7 +159,7 @@ const Body = ({
               return (
                 <td
                   key={`action-${id}-${globalIndex}-${y}`}
-                  className={`${globalRowClassname} ${!visible() && 'invisible'}`}
+                  className={`${globalRowClassname} ${!visible(obj) && 'invisible'}`}
                 >
                   <button
                     onClick={() => onClick(obj)}
