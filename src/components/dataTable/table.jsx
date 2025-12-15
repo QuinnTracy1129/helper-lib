@@ -14,24 +14,19 @@ const Head = ({ id = '', columns = [], columnConfig, showAction = false }) => {
     <thead>
       <tr className={`${bgColor} ${textColor}`}>
         {showIndex && <th className={`${globalColClassname} tabular-nums`} />}
-        {columns.map(
-          (
-            { text = '', style = {}, className = '', condition = () => true, visible = () => true },
-            index,
-          ) => {
-            if (!condition()) return null;
+        {columns.map(({ text = '', style = {}, className = '', condition = () => true }, index) => {
+          if (!condition()) return null;
 
-            return (
-              <th
-                key={`col-${id}-${index}`}
-                style={style}
-                className={`${globalColClassname} ${className} ${!visible() && 'invisible'}`}
-              >
-                {text}
-              </th>
-            );
-          },
-        )}
+          return (
+            <th
+              key={`col-${id}-${index}`}
+              style={style}
+              className={`${globalColClassname} ${className}`}
+            >
+              {text}
+            </th>
+          );
+        })}
         {showAction && <th className={globalColClassname} />}
       </tr>
     </thead>
@@ -117,8 +112,7 @@ const Body = ({
               objKey,
               format,
               isOptional = false,
-              condition = () => true, // This will output nothing
-              visible = () => true, // this will only hide the element
+              condition = () => true,
               style = {},
               className = '',
               // if `customRender` is passed `objKey`, `format` and `isOptional` are obsolete
@@ -134,44 +128,35 @@ const Body = ({
               <td
                 key={`cell-${id}-${globalIndex}-${y}`}
                 style={style}
-                className={`${globalRowClassname} ${className} ${!visible(obj) && 'invisible'}`}
+                className={`${globalRowClassname} ${className}`}
               >
                 {safeRender(obj, objKey, format, isOptional)}
               </td>
             );
           },
         )}
-        {showAction &&
-          rowActions.map(
-            (
-              {
-                icon: Icon,
-                text,
-                onClick,
-                className,
-                condition = () => true,
-                visible = () => true,
-              },
-              y,
-            ) => {
-              if (!condition(obj)) return null;
+        {showAction && (
+          <td className={globalRowClassname}>
+            <div className="join">
+              {rowActions.map(
+                ({ icon: Icon, text, onClick, className, condition = () => true }, y) => {
+                  if (!condition(obj)) return null;
 
-              return (
-                <td
-                  key={`action-${id}-${globalIndex}-${y}`}
-                  className={`${globalRowClassname} ${!visible(obj) && 'invisible'}`}
-                >
-                  <button
-                    onClick={() => onClick(obj)}
-                    className={`btn btn-sm lg:btn-md ${className}`}
-                  >
-                    <Icon />
-                    {text && <span className="hidden lg:block">{text}</span>}
-                  </button>
-                </td>
-              );
-            },
-          )}
+                  return (
+                    <button
+                      key={`action-${id}-${globalIndex}-${y}`}
+                      onClick={() => onClick(obj)}
+                      className={`btn btn-sm lg:btn-md ${className}`}
+                    >
+                      <Icon />
+                      {text && <span className="hidden lg:block">{text}</span>}
+                    </button>
+                  );
+                },
+              )}
+            </div>
+          </td>
+        )}
       </tr>
     );
   });
