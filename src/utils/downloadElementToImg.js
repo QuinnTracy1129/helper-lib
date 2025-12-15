@@ -45,23 +45,26 @@ export async function downloadElementAsImage(
     const canvas = await html2canvas(ref.current, {
       scale,
       backgroundColor,
-      useCORS: true,
+      onclone: (clonedDoc) => {
+        clonedDoc.body.style.backgroundColor = '#ffffff';
+
+        clonedDoc.querySelectorAll('*').forEach((el) => {
+          el.style.color = '#000000';
+          el.style.backgroundColor = 'transparent';
+          el.style.borderColor = '#000000';
+        });
+      },
     });
 
-    const dataUrl = canvas.toDataURL('image/png');
-
     const link = document.createElement('a');
-    link.href = dataUrl;
     link.download = filename;
-
-    document.body.appendChild(link);
+    link.href = canvas.toDataURL('image/png');
     link.click();
-    document.body.removeChild(link);
+
     toast({
       icon: 'success',
       text: '[downloadElementAsImage] Download successful',
     });
-    console.info('[downloadElementAsImage]', filename);
   } catch (error) {
     toast({
       icon: 'error',
