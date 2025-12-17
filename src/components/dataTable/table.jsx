@@ -144,6 +144,7 @@ const Body = ({
 
                   return (
                     <button
+                      title={text}
                       key={`action-${id}-${globalIndex}-${y}`}
                       onClick={() => onClick(obj)}
                       className={`btn btn-sm lg:btn-md ${className}`}
