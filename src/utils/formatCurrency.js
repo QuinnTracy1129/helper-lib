@@ -6,8 +6,10 @@ const currencyMultiplier = {
   USD: 58.15,
 };
 
-export function formatCurrency({ num = 0, decimal = 2, currency = 'PHP' }) {
+export function formatCurrency(num, options = {}) {
   if (typeof num !== 'number') return '-';
+
+  const { decimal = 2, currency = 'PHP' } = options;
 
   const multiplier = currencyMultiplier[currency];
 
