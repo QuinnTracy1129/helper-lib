@@ -3,3 +3,4 @@
 export { useDebounce } from './useDebounce.jsx';
 export { useToggle } from './useToggle.jsx';
 export { DataTable } from './dataTable/index.jsx';
+export { Calendar } from './calendar/index.jsx';
