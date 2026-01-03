@@ -68,7 +68,13 @@ const getHeader = () => {
 const post = async (endpoint = '', payload = {}, options = {}) => {
   await waitForConfig();
 
-  const { useToast = true, title = '', text = '', isAuthenticated = true } = options;
+  const {
+    useToast = true,
+    title = '',
+    text = '',
+    isAuthenticated = true,
+    responseType = 'json',
+  } = options;
 
   if (isAuthenticated) validateAuth();
 
@@ -100,7 +106,10 @@ const post = async (endpoint = '', payload = {}, options = {}) => {
     .then(({ data }) => {
       if (useToast) toast({ icon: 'success', title: title || 'Success', text });
 
-      return aesKit.decrypt(data.payload);
+      if (responseType === 'json') return aesKit.decrypt(data.payload);
+
+      // For binary responses (files), just return the raw data
+      return data;
     })
     .catch(errorHandler);
 };
