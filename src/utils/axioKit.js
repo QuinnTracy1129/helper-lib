@@ -82,8 +82,21 @@ const post = async (endpoint = '', payload = {}, options = {}) => {
       },
     });
 
+  let body = { payload: aesKit.encrypt(payload) };
+
+  if (payload.file) {
+    const formData = new FormData();
+
+    const { file, ...rest } = payload;
+
+    formData.append('file', file);
+    formData.append('payload', aesKit.encrypt(rest));
+
+    body = formData;
+  }
+
   return await axios
-    .post(endpoint, { payload: aesKit.encrypt(payload) }, getHeader())
+    .post(endpoint, body, getHeader())
     .then(({ data }) => {
       if (useToast) toast({ icon: 'success', title: title || 'Success', text });
 
@@ -138,8 +151,21 @@ const put = async (endpoint = '', payload = {}, options = {}) => {
       },
     });
 
+  let body = { payload: aesKit.encrypt(payload) };
+
+  if (payload.file) {
+    const formData = new FormData();
+
+    const { file, ...rest } = payload;
+
+    formData.append('file', file);
+    formData.append('payload', aesKit.encrypt(rest));
+
+    body = formData;
+  }
+
   return await axios
-    .put(endpoint, { payload: aesKit.encrypt(payload) }, getHeader())
+    .put(endpoint, body, getHeader())
     .then(({ data }) => {
       if (useToast) toast({ icon: 'success', title: title || 'Success', text });
 
