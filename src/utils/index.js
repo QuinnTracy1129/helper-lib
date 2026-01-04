@@ -25,6 +25,7 @@ export { outputCreator } from './outputCreator.js';
 export { generatePassword } from './generatePassword.js';
 export { copyToClipboard } from './copyToClipboard.js';
 export { downloadElementAsImage } from './downloadElementToImg.js';
+export { calculateDueDate } from './calculateDueDate.js';
 export { mongoKit } from './mongoKit.js';
 export { axioKit } from './axioKit.js';
 export { aesKit } from './aesKit.js';
