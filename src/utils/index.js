@@ -7,6 +7,7 @@ export { sleep } from './sleep.js';
 export { inputDateMin } from './inputDateMin.js';
 export { paginateArray } from './paginateArray.js';
 export { formatCurrency } from './formatCurrency.js';
+export { formatNumber } from './formatNumber.js';
 export { formatString } from './formatString.js';
 export { formatContact } from './formatContact.js';
 export { formatFullname } from './formatFullname.js';
