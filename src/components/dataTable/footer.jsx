@@ -36,7 +36,7 @@ export default function Footer({
         ${isLoading || !isPayloadEmpty ? 'sm:justify-between' : ''} mt-2`}
     >
       {isLoading && (
-        <div className="animate-pulse h-5 rounded-xs bg-neutral-content w-96 hidden sm:block" />
+        <div className="skeleton h-5 rounded-xs bg-neutral-content w-96 hidden sm:block" />
       )}
       {!isPayloadEmpty && !isLoading && (
         <div className="text-neutral hidden sm:block">
