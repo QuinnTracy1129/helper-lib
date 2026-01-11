@@ -23,7 +23,7 @@ const errorHandler = ({ response = {}, ...rest }) => {
     toast({
       icon: 'error',
       title,
-      text: message.length < 30 ? message : 'Open console to debug',
+      text: message.length < 50 ? message : 'Open console to debug',
     });
   throw new Error(data.error);
 };
