@@ -139,12 +139,23 @@ const Body = ({
           <td className={globalRowClassname}>
             <div className="join">
               {rowActions.map(
-                ({ icon: Icon, text, onClick, className, condition = () => true }, y) => {
+                (
+                  {
+                    icon: Icon,
+                    text,
+                    onClick,
+                    className,
+                    disabled = false,
+                    condition = () => true,
+                  },
+                  y,
+                ) => {
                   if (!condition(obj)) return null;
 
                   return (
                     <button
                       title={text}
+                      disabled={disabled}
                       key={`action-${id}-${globalIndex}-${y}`}
                       onClick={() => onClick(obj)}
                       className={`btn btn-sm lg:btn-md ${className}`}
