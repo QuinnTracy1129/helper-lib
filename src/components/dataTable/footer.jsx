@@ -7,6 +7,7 @@ export default function Footer({
   totalEntries,
   isPayloadEmpty,
   pageButtonRange = 3, // Optional: how many page buttons to show
+  removePagination,
 }) {
   const totalPages = Math.ceil(totalEntries / maxItemPerPage);
   const start = (currentPage - 1) * maxItemPerPage + 1;
@@ -38,7 +39,7 @@ export default function Footer({
       {isLoading && (
         <div className="skeleton h-5 rounded-xs bg-neutral-content w-96 hidden sm:block" />
       )}
-      {!isPayloadEmpty && !isLoading && (
+      {!isPayloadEmpty && !isLoading && !removePagination && (
         <div className="text-neutral hidden sm:block">
           Showing&nbsp;<span className="tabular-nums">{start}</span>&nbsp;to&nbsp;
           <span className="tabular-nums">{end}</span>&nbsp;of&nbsp;
@@ -46,36 +47,38 @@ export default function Footer({
           &nbsp;entries
         </div>
       )}
-      <div className="join">
-        <button
-          disabled={isPayloadEmpty || currentPage <= 1 || isLoading}
-          onClick={() => handlePageClick(currentPage - 1)}
-          className="btn join-item btn-sm btn-outline btn-primary"
-        >
-          &lt;
-        </button>
-
-        {getVisiblePages().map((pageNum) => (
+      {!removePagination && (
+        <div className="join">
           <button
-            key={`pageNavigation-${id}-${pageNum}`}
-            disabled={isPayloadEmpty || isLoading}
-            onClick={() => handlePageClick(pageNum)}
-            className={`btn join-item btn-sm btn-outline ${
-              pageNum === currentPage ? 'btn-active btn-primary' : 'btn-primary'
-            } tabular-nums`}
+            disabled={isPayloadEmpty || currentPage <= 1 || isLoading}
+            onClick={() => handlePageClick(currentPage - 1)}
+            className="btn join-item btn-sm btn-outline btn-primary"
           >
-            {pageNum}
+            &lt;
           </button>
-        ))}
 
-        <button
-          disabled={isPayloadEmpty || currentPage >= totalPages || isLoading}
-          onClick={() => handlePageClick(currentPage + 1)}
-          className="btn join-item btn-sm btn-outline btn-primary"
-        >
-          &gt;
-        </button>
-      </div>
+          {getVisiblePages().map((pageNum) => (
+            <button
+              key={`pageNavigation-${id}-${pageNum}`}
+              disabled={isPayloadEmpty || isLoading}
+              onClick={() => handlePageClick(pageNum)}
+              className={`btn join-item btn-sm btn-outline ${
+                pageNum === currentPage ? 'btn-active btn-primary' : 'btn-primary'
+              } tabular-nums`}
+            >
+              {pageNum}
+            </button>
+          ))}
+
+          <button
+            disabled={isPayloadEmpty || currentPage >= totalPages || isLoading}
+            onClick={() => handlePageClick(currentPage + 1)}
+            className="btn join-item btn-sm btn-outline btn-primary"
+          >
+            &gt;
+          </button>
+        </div>
+      )}
     </div>
   );
 }

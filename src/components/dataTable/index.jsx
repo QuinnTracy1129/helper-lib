@@ -33,6 +33,7 @@ export function DataTable({
   customSearch, // a function that will be triggered when we search
   zebra = false, // adds the `table-zebra` class
   removeSearch = false, // removes the search input
+  removePagination = false, // removes the pagination configs
 }) {
   const [currentPage, setCurrentPage] = useState(1),
     [maxItemPerPage, setMaxItemPerPage] = useState(() =>
@@ -77,6 +78,7 @@ export function DataTable({
         searchStr={searchStr}
         setSearchStr={setSearchStr}
         removeSearch={removeSearch}
+        removePagination={removePagination}
       />
       <div className="overflow-x-auto">
         <Table
@@ -103,6 +105,7 @@ export function DataTable({
         totalEntries={filteredPayload.length}
         maxItemPerPage={maxItemPerPage}
         isPayloadEmpty={isPayloadEmpty}
+        removePagination={removePagination}
       />
     </div>
   );

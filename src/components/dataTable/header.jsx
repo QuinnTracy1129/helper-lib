@@ -11,6 +11,7 @@ export default function Header({
   searchStr,
   setSearchStr,
   removeSearch,
+  removePagination,
 }) {
   const dataTableSearchRef = useRef(null);
 
@@ -63,23 +64,25 @@ export default function Header({
         )}
       </div>
 
-      <div className="flex items-center">
-        <fieldset className="fieldset">
-          <select
-            disabled={isPayloadEmpty || isLoading}
-            value={String(maxItemPerPage)}
-            onChange={({ target }) => handleMaxItemPerPageChange(Number(target.value))}
-            className="select rounded-none w-full focus:outline-0"
-          >
-            {paginationOptions.map((value, index) => (
-              <option key={`page-options-${id}-${index}`} value={value}>
-                {value}
-              </option>
-            ))}
-          </select>
-        </fieldset>
-        <div>&nbsp;entries per page</div>
-      </div>
+      {!removePagination && (
+        <div className="flex items-center">
+          <fieldset className="fieldset">
+            <select
+              disabled={isPayloadEmpty || isLoading}
+              value={String(maxItemPerPage)}
+              onChange={({ target }) => handleMaxItemPerPageChange(Number(target.value))}
+              className="select rounded-none w-full focus:outline-0"
+            >
+              {paginationOptions.map((value, index) => (
+                <option key={`page-options-${id}-${index}`} value={value}>
+                  {value}
+                </option>
+              ))}
+            </select>
+          </fieldset>
+          <div>&nbsp;entries per page</div>
+        </div>
+      )}
     </div>
   );
 }
