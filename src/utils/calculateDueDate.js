@@ -1,25 +1,27 @@
-export function calculateDueDate(createdAt, term) {
-  if (!createdAt || !term?.days) {
+export function calculateDueDate(startingDate, term) {
+  if (!startingDate || !term?.days) {
     return {
-      due: null,
-      diff: null,
+      dueAt: null,
+      diffDays: null,
       diffColor: 'text-base-content',
     };
   }
 
-  const createdDate = new Date(createdAt);
+  const start = new Date(startingDate);
 
-  // Due date = createdAt + term days
-  const dueDate = new Date(createdDate);
+  // dueAt = startingDate + term days (preserve time)
+  const dueDate = new Date(start);
   dueDate.setDate(dueDate.getDate() + Number(term.days));
 
+  // Today (normalized only for comparison)
   const today = new Date();
-
-  // Normalize time (avoid timezone edge cases)
   today.setHours(0, 0, 0, 0);
-  dueDate.setHours(0, 0, 0, 0);
 
-  const diffTime = dueDate.getTime() - today.getTime();
+  // Copy dueDate only for diff calculation
+  const dueDateForDiff = new Date(dueDate);
+  dueDateForDiff.setHours(0, 0, 0, 0);
+
+  const diffTime = dueDateForDiff.getTime() - today.getTime();
   const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
 
   let diffColor = 'text-success';
@@ -33,8 +35,8 @@ export function calculateDueDate(createdAt, term) {
   }
 
   return {
-    due: dueDate,
-    diff: diffDays,
+    dueAt: dueDate.toISOString(),
+    diffDays,
     diffColor,
   };
 }
