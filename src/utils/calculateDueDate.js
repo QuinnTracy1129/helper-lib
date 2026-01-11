@@ -1,5 +1,5 @@
-export function calculateDueDate(startingDate, term) {
-  if (!startingDate || !term?.days) {
+export function calculateDueDate(startingDate, term, dueAt) {
+  if (!startingDate || (!term?.days && !dueAt)) {
     return {
       dueAt: null,
       diffDays: null,
@@ -7,17 +7,23 @@ export function calculateDueDate(startingDate, term) {
     };
   }
 
-  const start = new Date(startingDate);
+  let dueDate;
 
-  // dueAt = startingDate + term days (preserve time)
-  const dueDate = new Date(start);
-  dueDate.setDate(dueDate.getDate() + Number(term.days));
+  if (dueAt) {
+    // Use explicit dueAt (override term.days)
+    dueDate = new Date(dueAt);
+  } else {
+    // Calculate from startingDate + term.days
+    const start = new Date(startingDate);
+    dueDate = new Date(start);
+    dueDate.setDate(dueDate.getDate() + Number(term.days));
+  }
 
   // Today (normalized only for comparison)
   const today = new Date();
   today.setHours(0, 0, 0, 0);
 
-  // Copy dueDate only for diff calculation
+  // Normalize dueDate only for diff calculation
   const dueDateForDiff = new Date(dueDate);
   dueDateForDiff.setHours(0, 0, 0, 0);
 
@@ -27,11 +33,9 @@ export function calculateDueDate(startingDate, term) {
   let diffColor = 'text-success';
 
   if (diffDays <= 1) {
-    // 🔴 Due today or overdue
-    diffColor = 'text-error';
+    diffColor = 'text-error'; // due today or overdue
   } else if (diffDays <= 5) {
-    // 🟡 2–5 days remaining
-    diffColor = 'text-warning';
+    diffColor = 'text-warning'; // approaching due
   }
 
   return {
