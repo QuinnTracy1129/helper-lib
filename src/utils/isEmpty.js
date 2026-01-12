@@ -5,8 +5,6 @@ export function isEmpty(val) {
   switch (typeof val) {
     case 'undefined':
       return true;
-    case 'boolean':
-    case 'number':
     case 'function':
       return true;
     case 'string':
