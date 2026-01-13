@@ -15,9 +15,9 @@ export function calculateInterest(loan, options = {}) {
   const rate = Number(interestToUse);
   if (!Number.isFinite(rate) || rate < 0) return 0;
 
-  const interestValue = amount * (rate / 100);
+  const interestValue = Math.ceil(amount * (rate / 100));
 
   if (interestAmountOnly) return interestValue;
 
-  return amount + interestValue;
+  return Math.ceil(amount + interestValue);
 }
