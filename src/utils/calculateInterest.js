@@ -1,4 +1,4 @@
-import { isEmpty } from './isEmpty';
+import { isEmpty } from './isEmpty.js';
 
 export function calculateInterest(loan, options = {}) {
   if (isEmpty(loan)) return 0;
