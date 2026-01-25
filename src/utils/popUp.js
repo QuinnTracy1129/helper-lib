@@ -9,6 +9,7 @@ export function popUp(func = () => true, options = {}) {
     .fire({
       title: '<strong>Are you sure?</strong>',
       icon: 'question',
+      width: '150px',
       html: `
         <p className="py-4">${body}</p>
   `,
