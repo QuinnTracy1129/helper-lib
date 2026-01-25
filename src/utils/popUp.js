@@ -1,10 +1,11 @@
 import Swal from 'sweetalert2';
+import { isEmpty } from './isEmpty.js';
 
 export function popUp(func = () => true, options = {}) {
   const {
     title = 'Are you sure?',
-    body,
-    confirmButtonText,
+    body = '',
+    confirmButtonText = 'Proceed',
     cancelButtonText = 'Cancel',
     icon = 'question',
   } = options;
@@ -18,7 +19,7 @@ export function popUp(func = () => true, options = {}) {
     buttonsStyling: false,
     title: `<strong>${title}</strong>`,
     icon,
-    html: `<p className="py-4">${body}</p>`,
+    ...(!isEmpty(body) && { html: `<p className="py-4">${body}</p>` }),
     showCloseButton: true,
     showCancelButton: true,
     focusConfirm: true,
