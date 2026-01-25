@@ -5,8 +5,6 @@ export function isEmpty(val) {
   switch (typeof val) {
     case 'undefined':
       return true;
-    case 'function':
-      return true;
     case 'string':
       return val.length === 0;
     case 'object':

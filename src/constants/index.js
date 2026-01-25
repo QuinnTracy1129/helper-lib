@@ -5,3 +5,4 @@
 export { default as apiErrorHeaders } from './apiErrorHeaders.js';
 export { default as philippineAddresses } from './philippineAddresses/index.js';
 export { default as weeks } from './weeks.js';
+export { default as productCategories } from './productCategories.js';

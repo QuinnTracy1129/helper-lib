@@ -10,7 +10,7 @@
   },
   "scripts": {
     "clone": "npm install && npm start",
-    "start": "vite --port 3000 --host --open",
+    "start": "vite --port 3001 --host --open",
     "build": "vite build",
     "lint": "eslint ."
   },
