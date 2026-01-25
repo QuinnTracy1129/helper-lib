@@ -1,14 +1,9 @@
 import Swal from 'sweetalert2';
 
 export function popUp(func = () => true, options = {}) {
-  const { body, confirmButtonText } = options;
-  const swalWithBootstrapButtons = Swal.mixin({
-    customClass: {
-      confirmButton: 'btn btn-primary w-1/2',
-      cancelButton: 'btn btn-ghost w-full',
-    },
-    buttonsStyling: false,
-  });
+  const { body, confirmButtonText, config } = options;
+
+  const swalWithBootstrapButtons = Swal.mixin(config);
 
   swalWithBootstrapButtons
     .fire({
