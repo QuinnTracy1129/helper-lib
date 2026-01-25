@@ -8,13 +8,11 @@ export function popUp(func = () => true, options = {}) {
   swalWithBootstrapButtons
     .fire({
       customClass: {
-        customClass: {
-          actions: 'flex gap-x-5',
-          confirmButton: 'btn btn-primary w-40',
-          cancelButton: 'btn btn-ghost w-40',
-        },
-        buttonsStyling: false,
+        actions: 'flex gap-x-5',
+        confirmButton: 'btn btn-primary w-40',
+        cancelButton: 'btn btn-ghost w-40',
       },
+      buttonsStyling: false,
       title: '<strong>Are you sure?</strong>',
       icon: 'question',
       html: `
