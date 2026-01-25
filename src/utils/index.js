@@ -28,6 +28,7 @@ export { generatePassword } from './generatePassword.js';
 export { copyToClipboard } from './copyToClipboard.js';
 export { downloadElementAsImage } from './downloadElementToImg.js';
 export { calculateDueDate } from './calculateDueDate.js';
+export { getProductCategories } from './getProductCategories.js';
 export { popUp } from './popUp.js';
 export { mongoKit } from './mongoKit.js';
 export { axioKit } from './axioKit.js';
